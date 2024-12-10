@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".features.AddEmployeeActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarEditMenuItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="THÔNG TIN MÓN ĂN"
+        app:titleTextColor="#fff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView16"
+            style="@style/MyTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mã món ăn:" />
+
+        <EditText
+            android:id="@+id/edtItemID"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:textSize="18sp"
+            android:textColor="#f00"
+            android:textStyle="bold"
+            android:enabled="false"
+            android:inputType="text"
+            android:text="ID" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/MyTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên món ăn:" />
+
+        <EditText
+            android:id="@+id/edtItemName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Nhập tên món"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textView12"
+            style="@style/MyTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mô tả:" />
+
+        <EditText
+            android:id="@+id/edtItemDesc"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Nhập mô tả"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/MyTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giá tiền:" />
+
+        <EditText
+            android:id="@+id/edtItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Nhập giá tiền"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView15"
+            style="@style/MyTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hình ảnh:" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnItemImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/img"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnEditItem"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="SỬA MÓN ĂN" />
+
+            <Button
+                android:id="@+id/btnDeleteItem"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="XÓA MÓN ĂN" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

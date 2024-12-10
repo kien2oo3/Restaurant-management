@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".features.AddEmployeeActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAddMenuItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="THÊM MÓN ĂN"
+        app:titleTextColor="#fff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên món ăn:"
+            style="@style/MyTextViewStyle"/>
+
+        <EditText
+            android:id="@+id/edtNewItemName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Nhập tên món" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mô tả:"
+            style="@style/MyTextViewStyle"/>
+
+        <EditText
+            android:id="@+id/edtNewItemDesc"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:hint="Nhập mô tả"
+            android:gravity="start|top"/>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giá tiền:"
+            style="@style/MyTextViewStyle"/>
+
+        <EditText
+            android:id="@+id/edtNewItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Nhập giá tiền" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hình ảnh:"
+            style="@style/MyTextViewStyle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnNewItemImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/img"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAddMenuItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="THÊM MÓN ĂN" />
+    </LinearLayout>
+
+</LinearLayout>

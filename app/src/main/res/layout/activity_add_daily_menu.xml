@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".features.AddDailyMenuActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAddMonAnTheoNgay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="MÓN THEO NGÀY"
+        app:titleTextColor="#fff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Ngày:"
+            android:textSize="20sp"
+            style="@style/MyTextViewStyle"/>
+
+        <EditText
+            android:id="@+id/edtSelectDate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="2"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Chọn ngày"
+            android:textColor="#f00"/>
+
+        <Button
+            android:id="@+id/btnAddDailyMenuItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm Menu" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh sách món:"
+        android:textSize="20sp"
+        android:padding="10dp"/>
+
+    <ListView
+        android:id="@+id/lvMonAn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Trà Thanh Hoa" />
+
+    <ImageView
+        android:id="@+id/imgItem"
+        android:layout_width="0dp"
+        android:layout_height="80sp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/demo_monan" />
+
+    <TextView
+        android:id="@+id/txtItemPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="100.000đ" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btnToEditMenuItem"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/icon_edit"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</LinearLayout>
