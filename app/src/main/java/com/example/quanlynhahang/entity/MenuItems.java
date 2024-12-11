@@ -1,6 +1,9 @@
 package com.example.quanlynhahang.entity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.Objects;
 
 public class MenuItems {
     private int menu_item_id;
@@ -68,5 +71,20 @@ public class MenuItems {
                 " - " + menu_item_description +
                 " - " + menu_item_price +
                 " - " + image;
+    }
+
+    // equals: So sánh hai đối tượng dựa trên nội dung bạn muốn (so sánh theo menu_item_id)
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj==null){
+            return false;
+        }
+        MenuItems item = (MenuItems) obj;
+        return this.menu_item_id == item.getMenu_item_id();
+    }
+    // hashCode: Hỗ trợ so sánh nhanh bằng cách ánh xạ đối tượng thành giá trị băm, nếu trung id thì không thêm vào Set nữa
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(menu_item_id);
     }
 }

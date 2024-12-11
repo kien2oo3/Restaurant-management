@@ -1,5 +1,6 @@
 package com.example.quanlynhahang.features;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -20,12 +22,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quanlynhahang.Adapters.DailyMenuItemAdapter;
+import com.example.quanlynhahang.QLMenuTheoNgayActivity;
+import com.example.quanlynhahang.QuanLyMonAnActivity;
 import com.example.quanlynhahang.R;
 import com.example.quanlynhahang.dao.DailyMenuDAO;
 import com.example.quanlynhahang.dao.MenuItemDAO;
 import com.example.quanlynhahang.entity.MenuItems;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class EditDailyMenuActivity extends AppCompatActivity {
     EditText edtDate;
@@ -60,13 +65,13 @@ public class EditDailyMenuActivity extends AppCompatActivity {
         adapter = new DailyMenuItemAdapter(EditDailyMenuActivity.this, R.layout.layout_item_mon_theo_ngay, myArr);
 
         Intent myIntent = getIntent();
-        if(myIntent!=null){
+        if (myIntent != null) {
             String date = myIntent.getStringExtra("mydate");
-            if(date!=null){
+            if (date != null) {
                 edtDate.setText(date);
                 ArrayList<MenuItems> list_itemSelected = dailyMenuDAO.getItemsIDByDate(date);
-                Toast.makeText(this, "Kích thước là: "+list_itemSelected.size(), Toast.LENGTH_LONG).show();
-                if(!list_itemSelected.isEmpty()){
+                Toast.makeText(this, "Kích thước: " + list_itemSelected.size(), Toast.LENGTH_LONG).show();
+                if (!list_itemSelected.isEmpty()) {
                     adapter.setSelectedItems(list_itemSelected);
                 }
             }
@@ -99,13 +104,53 @@ public class EditDailyMenuActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.actionSua) {
-
+            Set<MenuItems> itemsSelected = adapter.getSelectedItems();
+            if (itemsSelected.isEmpty()) {
+                Toast.makeText(this, "Hãy chọn ít nhất 1 món ăn cho menu!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            ArrayList<MenuItems> itemsSelectedConvert = new ArrayList<>(itemsSelected);
+            if (dailyMenuDAO.updateMenuItemsForDate(edtDate.getText().toString(), itemsSelectedConvert)) {
+                Toast.makeText(this, String.format("Cập nhật thực đơn ngày %s thành công!", edtDate.getText().toString()), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditDailyMenuActivity.this, QLMenuTheoNgayActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Có lỗi khi cập nhật các món theo ngày!", Toast.LENGTH_SHORT).show();
+            }
             return true;
         } else if (id == R.id.actionXoa) {
-
+            showDialog();
             return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditDailyMenuActivity.this);
+        builder.setTitle("Xóa thực đơn");
+        builder.setMessage("Bạn chắc chắn muốn xóa thực đơn ngày " + edtDate.getText().toString() + "?");
+        builder.setIcon(R.drawable.icon_delete);
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dailyMenuDAO.deleteMenuItemsForDate(edtDate.getText().toString())) {
+                    Toast.makeText(EditDailyMenuActivity.this, String.format("Xóa thực đơn ngày %s thành công!", edtDate.getText().toString()), Toast.LENGTH_SHORT).show();
+                    Intent myIntent = new Intent(EditDailyMenuActivity.this, QLMenuTheoNgayActivity.class);
+                    startActivity(myIntent);
+                } else {
+                    Toast.makeText(EditDailyMenuActivity.this, String.format("Lỗi khi xóa thực đơn ngày %s!", edtDate.getText().toString()), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.create().show();
     }
 
     @Override

@@ -18,9 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quanlynhahang.Adapters.DailyMenuItemAdapter;
-import com.example.quanlynhahang.Adapters.MenuItemAdapter;
 import com.example.quanlynhahang.R;
-import com.example.quanlynhahang.dao.DailyMenuItemDAO;
+import com.example.quanlynhahang.dao.DailyMenuDAO;
 import com.example.quanlynhahang.dao.MenuItemDAO;
 import com.example.quanlynhahang.entity.MenuItems;
 
@@ -35,7 +34,7 @@ public class AddDailyMenuActivity extends AppCompatActivity implements View.OnCl
     Toolbar toolbarAddMonAnTheoNgay;
 
     MenuItemDAO menuItemDAO = null;
-    DailyMenuItemDAO dailyMenuItemDAO = null;
+    DailyMenuDAO dailyMenuDAO = null;
 
     ArrayList<MenuItems> myArr = null;
     DailyMenuItemAdapter adapter = null;
@@ -52,7 +51,7 @@ public class AddDailyMenuActivity extends AppCompatActivity implements View.OnCl
         });
 
         menuItemDAO = new MenuItemDAO(AddDailyMenuActivity.this);
-        dailyMenuItemDAO = new DailyMenuItemDAO(AddDailyMenuActivity.this);
+        dailyMenuDAO = new DailyMenuDAO(AddDailyMenuActivity.this);
 
         getWidgets();
 
@@ -94,7 +93,7 @@ public class AddDailyMenuActivity extends AppCompatActivity implements View.OnCl
                 return;
             }
             ArrayList<MenuItems> temp = new ArrayList<>(itemsSelected);
-            if(dailyMenuItemDAO.insertMenuItemsForDate(edtSelectDate.getText().toString(), temp)){
+            if(dailyMenuDAO.insertMenuItemsForDate(edtSelectDate.getText().toString(), temp)){
                 Toast.makeText(this, "Thêm món ăn theo ngày thành công!", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(this, "Lỗi khi thêm món ăn theo ngày!", Toast.LENGTH_SHORT).show();

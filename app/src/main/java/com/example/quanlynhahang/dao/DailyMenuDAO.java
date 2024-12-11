@@ -1,5 +1,6 @@
 package com.example.quanlynhahang.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -60,7 +61,6 @@ public class DailyMenuDAO {
         return total;
     }
 
-
     public ArrayList<MenuItems> getItemsIDByDate(String date) {
         SQLiteDatabase database = databaseUtils.getReadableDatabase();
         ArrayList<MenuItems> listItemsByDate = new ArrayList<>();
@@ -97,6 +97,132 @@ public class DailyMenuDAO {
         cursor.close();
         database.close();
         return listItemsByDate;
+    }
+
+    public int getDailyMenuIdByDate(String date){
+        SQLiteDatabase database = databaseUtils.getReadableDatabase();
+        int id = -1;
+        String sql = "SELECT daily_menu_id FROM daily_menu WHERE menu_date=?";
+        Cursor cursor = database.rawQuery(sql, new String[]{date});
+        if(cursor.moveToFirst()){
+            id = cursor.getInt(0);
+        }
+        return id;
+    }
+
+    public boolean insertMenuItemsForDate(String date, ArrayList<MenuItems> list) {
+        SQLiteDatabase database = databaseUtils.getWritableDatabase();
+
+        long dailyMenuId = -1;
+        boolean isSuccess = false;
+
+        try {
+            // Bắt đầu 1 giao dịch
+            database.beginTransaction();
+
+            // Chèn ngày vào bảng daily_menu
+            ContentValues dailyMenuValues = new ContentValues();
+            dailyMenuValues.put("menu_date", date);
+            dailyMenuId = database.insert("daily_menu", null, dailyMenuValues);
+
+            if (dailyMenuId == -1) {
+                throw new Exception("Lỗi khi chèn vào bảng daily_menu!");
+            }
+
+            // Chèn danh sách món ăn vào bảng daily_menu_items
+            for (MenuItems menuItem : list) {
+                ContentValues menuItemValues = new ContentValues();
+                menuItemValues.put("daily_menu_id", dailyMenuId);
+                menuItemValues.put("menu_item_id", menuItem.getMenu_item_id());
+
+                long result = database.insert("daily_menu_items", null, menuItemValues);
+                if (result == -1) {
+                    throw new Exception("Lỗi khi chèn vào bảng daily_menu_items");
+                }
+            }
+
+            // Hoàn thành giao dịch
+            isSuccess = true;
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            dailyMenuId = -1;
+            e.printStackTrace();
+        } finally {
+            // Kết thúc giao dịch
+            database.endTransaction();
+            database.close();
+        }
+        return isSuccess;
+    }
+
+    public boolean updateMenuItemsForDate(String date, ArrayList<MenuItems> newMenuItemsList) {
+        SQLiteDatabase database = databaseUtils.getWritableDatabase();
+        boolean isSuccess = false;
+        try {
+            // Bắt đầu transaction để đảm bảo tính toàn vẹn dữ liệu
+            database.beginTransaction();
+
+            // Lấy id cua date
+            int id = getDailyMenuIdByDate(date);
+            if(id==-1){
+                return false;
+            }
+
+            // Xóa các menu_item liên quan đến ngày
+            database.delete(
+                    "daily_menu_items",
+                    "daily_menu_id IN (SELECT daily_menu_id FROM daily_menu WHERE menu_date=?)",
+                    new String[]{date}
+            );
+
+            // Thêm các menu_item mới
+            // Chèn danh sách món ăn vào bảng daily_menu_items
+            for (MenuItems menuItem : newMenuItemsList) {
+                ContentValues menuItemValues = new ContentValues();
+                menuItemValues.put("daily_menu_id", id);
+                menuItemValues.put("menu_item_id", menuItem.getMenu_item_id());
+
+                long result = database.insert("daily_menu_items", null, menuItemValues);
+                if (result == -1) {
+                    throw new Exception("Lỗi khi chèn vào bảng daily_menu_items");
+                }
+            }
+
+            // Hoàn thành transaction
+            database.setTransactionSuccessful();
+            isSuccess = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            database.endTransaction(); // Kết thúc transaction
+            database.close();
+        }
+        return isSuccess;
+    }
+
+
+    public boolean deleteMenuItemsForDate(String date) {
+        SQLiteDatabase database = databaseUtils.getWritableDatabase();
+        boolean isSuccess = false;
+        try {
+            database.beginTransaction();
+            // Xóa từ bảng daily_menu_items trước:
+            database.delete("daily_menu_items", "daily_menu_id IN (SELECT daily_menu_id FROM daily_menu WHERE menu_date=?)", new String[]{date});
+
+            // Tiếp theo là xóa đến bảng daily_menu
+            database.delete("daily_menu", "menu_date=?", new String[]{date});
+
+            database.setTransactionSuccessful();
+
+            isSuccess = true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            database.endTransaction();
+            database.close();
+        }
+        return isSuccess;
     }
 
     public void close() {
