@@ -73,18 +73,22 @@ public class MenuItems {
                 " - " + image;
     }
 
-    // equals: So sánh hai đối tượng dựa trên nội dung bạn muốn (so sánh theo menu_item_id)
+    // equals: So sánh hai đối tượng dựa trên nội dung (so sánh theo menu_item_id)
     @Override
     public boolean equals(@Nullable Object obj) {
-        if(obj==null){
-            return false;
+        if (this == obj) {
+            return true; // Nếu hai tham chiếu giống nhau
         }
-        MenuItems item = (MenuItems) obj;
-        return this.menu_item_id == item.getMenu_item_id();
+        if (obj == null || getClass() != obj.getClass()) {
+            return false; // Nếu obj là null hoặc khác kiểu
+        }
+        MenuItems other = (MenuItems) obj;
+        return this.menu_item_id == other.menu_item_id; // So sánh dựa trên ID
     }
+
     // hashCode: Hỗ trợ so sánh nhanh bằng cách ánh xạ đối tượng thành giá trị băm, nếu trung id thì không thêm vào Set nữa
     @Override
     public int hashCode() {
-        return Objects.hashCode(menu_item_id);
+        return Integer.hashCode(menu_item_id);
     }
 }

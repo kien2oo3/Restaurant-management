@@ -33,6 +33,7 @@ public class UserDAO {
             }
         }
         cursor.close();
+        database.close();
         return users;
     }
 
@@ -61,7 +62,9 @@ public class UserDAO {
         ContentValues values = new ContentValues();
         values.put("username", user.getUsername());
         values.put("password", user.getPassword());
-        return database.insert("user", null, values);
+        long rs = database.insert("user", null, values);
+        database.close();
+        return rs;
     }
 
     public void close() {

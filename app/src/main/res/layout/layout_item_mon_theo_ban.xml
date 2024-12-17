@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtTenMonChoBan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Xôi thập cẩm"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/edtGiaMonChoBan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:text="35.000đ"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:enabled="false"
+        android:textColor="#000"/>
+
+    <EditText
+        android:id="@+id/edtSoLuongChoBan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:text="0"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:inputType="number" />
+
+    <CheckBox
+        android:id="@+id/chkChoBan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+</LinearLayout>

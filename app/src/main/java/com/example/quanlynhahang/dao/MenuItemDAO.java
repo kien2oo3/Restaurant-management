@@ -35,10 +35,33 @@ public class MenuItemDAO {
             }
         }
         cursor.close();
+        database.close();
         return menuItems;
     }
 
-    public MenuItems getAllMenuItemByID(int id) {
+    public ArrayList<MenuItems> getAllMenuItemByMenuDate(String date) {
+        ArrayList<MenuItems> menuItems = new ArrayList<>();
+        SQLiteDatabase database = databaseUtils.getReadableDatabase();
+        String sql = "SELECT * FROM menu_items mi JOIN daily_menu_items dmi ON mi.menu_item_id = dmi.menu_item_id JOIN daily_menu dm ON dm.daily_menu_id = dmi.daily_menu_id WHERE dm.menu_date=?;";
+        Cursor cursor = database.rawQuery(sql, new String[]{date});
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                int menu_item_id = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("menu_item_id")));
+                String menu_item_name = cursor.getString(cursor.getColumnIndexOrThrow("menu_item_name"));
+                String menu_item_description = cursor.getString(cursor.getColumnIndexOrThrow("menu_item_description"));
+                int menu_item_price = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("menu_item_price")));
+                String image = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+                MenuItems x = new MenuItems(menu_item_id, menu_item_name, menu_item_description, menu_item_price, image);
+                menuItems.add(x);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        database.close();
+        return menuItems;
+    }
+
+    public MenuItems getMenuItemByID(int id) {
         MenuItems item = null;
         SQLiteDatabase database = databaseUtils.getReadableDatabase();
         String sql = "SELECT * FROM menu_items WHERE menu_item_id=?";
@@ -53,6 +76,7 @@ public class MenuItemDAO {
         }
 
         cursor.close();
+        database.close();
         return item;
     }
 
@@ -63,7 +87,9 @@ public class MenuItemDAO {
         values.put("menu_item_description", e.getMenu_item_description());
         values.put("menu_item_price", e.getMenu_item_price());
         values.put("image", e.getImage());
-        return database.insert("menu_items", null, values);
+        long rs = database.insert("menu_items", null, values);
+        database.close();
+        return rs;
     }
 
     public int editMenuItemByID(MenuItems e) {
@@ -75,14 +101,18 @@ public class MenuItemDAO {
         values.put("image", e.getImage());
         String whereClause = "menu_item_id=?";
         String[] whereArgs = new String[]{e.getMenu_item_id() + ""};
-        return database.update("menu_items", values, whereClause, whereArgs);
+        int rs = database.update("menu_items", values, whereClause, whereArgs);
+        database.close();
+        return rs;
     }
 
     public int deleteMenuItemByID(int id) {
         SQLiteDatabase database = databaseUtils.getWritableDatabase();
         String whereClause = "menu_item_id=?";
         String[] whereArgs = new String[]{id + ""};
-        return database.delete("menu_items", whereClause, whereArgs);
+        int rs = database.delete("menu_items", whereClause, whereArgs);
+        database.close();
+        return rs;
     }
 
     public void close() {

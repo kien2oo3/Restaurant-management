@@ -35,6 +35,7 @@ public class EmployeeDAO {
             }
         }
         cursor.close();
+        database.close();
         return employees;
     }
 
@@ -45,7 +46,9 @@ public class EmployeeDAO {
         values.put("phone_number", e.getPhone_number());
         values.put("position", e.getPosition());
         values.put("salary", e.getSalary());
-        return database.insert("employees", null, values);
+        long rs = database.insert("employees", null, values);
+        database.close();
+        return rs;
     }
 
     public int editEmployeeByID(Employees e) {
@@ -57,14 +60,18 @@ public class EmployeeDAO {
         values.put("salary", e.getSalary());
         String whereClause = "employee_id=?";
         String[] whereArgs = new String[]{e.getEmployee_id() + ""};
-        return database.update("employees", values, whereClause, whereArgs);
+        int rs = database.update("employees", values, whereClause, whereArgs);
+        database.close();
+        return rs;
     }
 
     public int deleteEmployeeByID(int id) {
         SQLiteDatabase database = databaseUtils.getWritableDatabase();
         String whereClause = "employee_id=?";
         String[] whereArgs = new String[]{id + ""};
-        return database.delete("employees", whereClause, whereArgs);
+        int rs = database.delete("employees", whereClause, whereArgs);
+        database.close();
+        return rs;
     }
 
     public void close() {

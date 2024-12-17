@@ -107,6 +107,7 @@ public class DailyMenuDAO {
         if(cursor.moveToFirst()){
             id = cursor.getInt(0);
         }
+        database.close();
         return id;
     }
 
@@ -145,7 +146,6 @@ public class DailyMenuDAO {
             isSuccess = true;
             database.setTransactionSuccessful();
         } catch (Exception e) {
-            dailyMenuId = -1;
             e.printStackTrace();
         } finally {
             // Kết thúc giao dịch

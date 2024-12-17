@@ -34,6 +34,7 @@ public class DailyMenuItemDAO {
             }
         }
         cursor.close();
+
         return dailyMenuItems;
     }
 

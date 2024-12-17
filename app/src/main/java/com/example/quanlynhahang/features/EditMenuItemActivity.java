@@ -47,7 +47,7 @@ public class EditMenuItemActivity extends AppCompatActivity implements View.OnCl
         if (intent != null) {
             int itemId = intent.getIntExtra("item_id", -1);
             if (itemId != -1) {
-                MenuItems item = menuItemDAO.getAllMenuItemByID(itemId);
+                MenuItems item = menuItemDAO.getMenuItemByID(itemId);
                 if (item != null) {
                     edtItemID.setText(String.valueOf(item.getMenu_item_id()));
                     edtItemName.setText(item.getMenu_item_name());

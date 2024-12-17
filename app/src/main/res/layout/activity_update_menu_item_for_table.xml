@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".features.EditTableActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarUpdateMonTheoBanAn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="THỰC ĐƠN CHO BÀN"
+        app:titleTextColor="#fff" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdateMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CẬP NHẬT" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView30"
+            style="@style/MyTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Tên món" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Giá"
+            android:gravity="center"
+            style="@style/MyTextViewStyle"/>
+
+        <TextView
+            android:id="@+id/textView31"
+            style="@style/MyTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Số lượng" />
+
+        <TextView
+            android:id="@+id/textView32"
+            style="@style/MyTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Thêm món" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvMonTheoBan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

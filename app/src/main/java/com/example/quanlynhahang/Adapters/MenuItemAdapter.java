@@ -40,7 +40,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItems> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            convertView = inflater.inflate(layoutId, parent, false);
+            convertView = inflater.inflate(layoutId, null);
         }
 
         if (!list.isEmpty() && position >= 0) {

@@ -65,7 +65,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void truyCapQLBan(View v) {
-        // Code here
+        Intent myItent = new Intent(HomeActivity.this, QuanLyBanAnActivity.class);
+        startActivity(myItent);
     }
 
     public void truyCapDoanhThu(View v) {
