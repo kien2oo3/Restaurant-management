@@ -8,16 +8,18 @@ public class Tables {
     private int capacity;
     private String status;
     private String table_date;
+    private String isPay;
 
     public Tables() {
     }
 
-    public Tables(int table_id, int table_number, int capacity, String status, String table_date) {
+    public Tables(int table_id, int table_number, int capacity, String status, String table_date, String isPay) {
         this.table_id = table_id;
         this.table_number = table_number;
         this.capacity = capacity;
         this.status = status;
         this.table_date = table_date;
+        this.isPay = isPay;
     }
 
     public int getTable_id() {
@@ -60,6 +62,14 @@ public class Tables {
         this.table_date = table_date;
     }
 
+    public String getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(String isPay) {
+        this.isPay = isPay;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -67,6 +77,7 @@ public class Tables {
                 " - " + table_number +
                 " - " + capacity +
                 " - " + status +
-                " - " + table_date;
+                " - " + table_date +
+                " - " + isPay;
     }
 }

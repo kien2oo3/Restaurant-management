@@ -12,8 +12,10 @@ import com.example.quanlynhahang.entity.MenuItems;
 import com.example.quanlynhahang.entity.TableMenuItems;
 import com.example.quanlynhahang.utils.DatabaseUtils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
 public class TableMenuItemDAO {
@@ -84,7 +86,6 @@ public class TableMenuItemDAO {
         return tableMenuItems;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean insertTableMenuItems(Map<MenuItems, Integer> list, int tableID){
         SQLiteDatabase database = databaseUtils.getWritableDatabase();
         boolean isSuccess = false;
@@ -99,12 +100,17 @@ public class TableMenuItemDAO {
             }
 
             for( Map.Entry<MenuItems, Integer> entry : list.entrySet() ){
-                LocalDateTime currentDateTime = LocalDateTime.now();
+                // Lấy ngày giờ hiện tại bằng Calendar
+                Calendar calendar = Calendar.getInstance();
+                // Định dạng ngày giờ theo "dd-MM-yyyy HH:mm:ss"
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                String formattedDateTime = formatter.format(calendar.getTime());
+
                 ContentValues values = new ContentValues();
                 values.put("table_id", tableID);
                 values.put("menu_item_id", entry.getKey().getMenu_item_id());
                 values.put("quantity", entry.getValue());
-                values.put("order_date", currentDateTime.toString());
+                values.put("order_date", formattedDateTime);
                 long result = database.insert("table_menu_items", null, values);
                 if (result == -1) {
                     throw new Exception("Lỗi khi chèn vào bảng table_menu_items");

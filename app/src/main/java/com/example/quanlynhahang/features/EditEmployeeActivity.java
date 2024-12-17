@@ -89,22 +89,22 @@ public class EditEmployeeActivity extends AppCompatActivity implements View.OnCl
 
     private boolean checkEditText() {
         if (edtNewFullName.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Không để trống họ tên!", Toast.LENGTH_SHORT).show();
+            edtNewFullName.setError("Không để trống họ tên!");
             edtNewFullName.requestFocus();
             return false;
         }
         if (edtNewPosition.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Không để trống vị trí!", Toast.LENGTH_SHORT).show();
+            edtNewPosition.setError("Không để trống vị trí!");
             edtNewPosition.requestFocus();
             return false;
         }
         if (edtNewPhoneNumber.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Không để trống số điện thoại!", Toast.LENGTH_SHORT).show();
+            edtNewPhoneNumber.setError("Không để trống số điện thoại!");
             edtNewPhoneNumber.requestFocus();
             return false;
         }
         if (edtNewSalary.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Không để trống tiền lương!", Toast.LENGTH_SHORT).show();
+            edtNewSalary.setError("Không để trống tiền lương!");
             edtNewSalary.requestFocus();
             return false;
         }
@@ -129,7 +129,7 @@ public class EditEmployeeActivity extends AppCompatActivity implements View.OnCl
             }
         } else if (btnDeleteEmployee == view) {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditEmployeeActivity.this);
-            builder.setTitle("Xóa nhân viên");
+            builder.setTitle("Xóa nhân viên " + edtNewFullName.getText().toString());
             builder.setMessage("Bạn chắc chắn muốn xóa?");
             builder.setIcon(R.drawable.icon_delete);
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {

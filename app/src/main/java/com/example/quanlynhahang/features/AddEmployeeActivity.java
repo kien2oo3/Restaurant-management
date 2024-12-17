@@ -46,33 +46,32 @@ public class AddEmployeeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String fullname = edtFullName.getText().toString();
                 if (fullname.isEmpty()) {
-                    Toast.makeText(AddEmployeeActivity.this, "Không để trống họ tên!", Toast.LENGTH_SHORT).show();
+                    edtFullName.setError("Không để trống họ tên!");
                     edtFullName.requestFocus();
                     return;
                 }
                 String phonenumber = edtPhoneNumber.getText().toString();
                 if (phonenumber.isEmpty()) {
-                    Toast.makeText(AddEmployeeActivity.this, "Không để trống số điện thoại!", Toast.LENGTH_SHORT).show();
+                    edtPhoneNumber.setError("Không để trống số điện thoại!");
                     edtPhoneNumber.requestFocus();
                     return;
                 }
                 String position = edtPosition.getText().toString();
                 if (position.isEmpty()) {
-                    Toast.makeText(AddEmployeeActivity.this, "Không để trống vị trí!", Toast.LENGTH_SHORT).show();
+                    edtPosition.setError("Không để trống vị trí!");
                     edtPosition.requestFocus();
                     return;
                 }
                 String salary = edtSalary.getText().toString();
                 if (salary.isEmpty()) {
-                    Toast.makeText(AddEmployeeActivity.this, "Không để trống lương!", Toast.LENGTH_SHORT).show();
+                    edtSalary.setError("Không để trống lương!");
                     edtSalary.requestFocus();
                     return;
                 }
                 Employees e = new Employees(0, fullname, phonenumber, position, Integer.parseInt(salary.trim()));
                 if (employeeDAO.addNewEmployee(e) != -1) {
                     Toast.makeText(AddEmployeeActivity.this, "Thêm nhân viên thành công!", Toast.LENGTH_SHORT).show();
-                    Intent myIntent = new Intent(AddEmployeeActivity.this, QuanLyNhanVienActivity.class);
-                    startActivity(myIntent);
+                    resetEditBox();
                 } else {
                     Toast.makeText(AddEmployeeActivity.this, "Lỗi thêm nhân viên!", Toast.LENGTH_SHORT).show();
                 }
@@ -94,6 +93,14 @@ public class AddEmployeeActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    private void resetEditBox(){
+        edtFullName.setText("");
+        edtFullName.requestFocus();
+        edtPosition.setText("");
+        edtPhoneNumber.setText("");
+        edtSalary.setText("");
     }
 
     @Override

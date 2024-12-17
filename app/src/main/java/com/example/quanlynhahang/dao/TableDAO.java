@@ -17,6 +17,10 @@ public class TableDAO {
         databaseUtils = new DatabaseUtils(context);
     }
 
+    public SQLiteDatabase getDataBaseModeWrite(){
+        return databaseUtils.getWritableDatabase();
+    }
+
     public Tables getTableByID(int id) {
         SQLiteDatabase database = databaseUtils.getReadableDatabase();
         Tables rs = null;
@@ -27,7 +31,8 @@ public class TableDAO {
             int capacity = cursor.getInt(cursor.getColumnIndexOrThrow("capacity"));
             String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
             String date = cursor.getString(cursor.getColumnIndexOrThrow("table_date"));
-            rs = new Tables(id, number, capacity, status, date);
+            String isPay = cursor.getString(cursor.getColumnIndexOrThrow("isPay"));
+            rs = new Tables(id, number, capacity, status, date, isPay);
         }
         cursor.close();
         database.close();
@@ -42,13 +47,17 @@ public class TableDAO {
         Cursor cursor = database.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow("table_id"));
-                int number = cursor.getInt(cursor.getColumnIndexOrThrow("table_number"));
-                int capacity = cursor.getInt(cursor.getColumnIndexOrThrow("capacity"));
-                String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
-                String date = cursor.getString(cursor.getColumnIndexOrThrow("table_date"));
-                Tables table = new Tables(id, number, capacity, status, date);
-                rs.add(table);
+                String isPay = cursor.getString(cursor.getColumnIndexOrThrow("isPay"));
+                if(isPay == null){
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow("table_id"));
+                    int number = cursor.getInt(cursor.getColumnIndexOrThrow("table_number"));
+                    int capacity = cursor.getInt(cursor.getColumnIndexOrThrow("capacity"));
+                    String date = cursor.getString(cursor.getColumnIndexOrThrow("table_date"));
+                    String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+                    Tables table = new Tables(id, number, capacity, status, date, isPay);
+                    rs.add(table);
+                }
+
                 cursor.moveToNext();
             }
         }
@@ -76,6 +85,7 @@ public class TableDAO {
         values.put("capacity", table.getCapacity());
         values.put("status", table.getStatus());
         values.put("table_date", table.getTable_date());
+        values.put("isPay", table.getIsPay());
         String whereClause = "table_id=?";
         String[] whereArgs = new String[]{table.getTable_id() + ""};
         int rs = database.update("tables", values, whereClause, whereArgs);

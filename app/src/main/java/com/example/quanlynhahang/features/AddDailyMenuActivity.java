@@ -115,7 +115,7 @@ public class AddDailyMenuActivity extends AppCompatActivity implements View.OnCl
                 this,
                 (view, year1, month1, dayOfMonth) -> {
                     // Định dạng ngày theo kiểu "dd-MM-yyyy"
-                    String date = String.format("%02d-%02d-%d", dayOfMonth, month1 + 1, year1);
+                    String date = String.format("%02d-%02d-%04d", dayOfMonth, month1 + 1, year1);
                     edtSelectDate.setText(date);
                 },
                 year, month, day
