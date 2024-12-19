@@ -43,7 +43,7 @@ public class TableDAO {
         SQLiteDatabase database = databaseUtils.getReadableDatabase();
         ArrayList<Tables> rs = new ArrayList<>();
 
-        String sql = "SELECT * FROM tables";
+        String sql = "SELECT * FROM tables ORDER BY table_number ASC";
         Cursor cursor = database.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {

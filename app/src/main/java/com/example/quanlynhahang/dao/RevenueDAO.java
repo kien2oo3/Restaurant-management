@@ -9,15 +9,70 @@ import android.widget.Toast;
 
 import com.example.quanlynhahang.QuanLyBanAnActivity;
 import com.example.quanlynhahang.entity.Revenue;
+import com.example.quanlynhahang.entity.RevenueDetail;
 import com.example.quanlynhahang.entity.Tables;
 import com.example.quanlynhahang.features.EditTableActivity;
 import com.example.quanlynhahang.utils.DatabaseUtils;
+
+import java.util.ArrayList;
 
 public class RevenueDAO {
     private DatabaseUtils databaseUtils;
 
     public RevenueDAO(Context context) {
         databaseUtils = new DatabaseUtils(context);
+    }
+
+    public ArrayList<Revenue> getAllRevenue() {
+        SQLiteDatabase database = databaseUtils.getReadableDatabase();
+        ArrayList<Revenue> rs = new ArrayList<>();
+        String sql = "SELECT * FROM revenue;";
+        Cursor cursor = database.rawQuery(sql, null, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("revenue_id"));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow("revenue_date"));
+                int amount = cursor.getInt(cursor.getColumnIndexOrThrow("revenue_amount"));
+                int tableId = cursor.getInt(cursor.getColumnIndexOrThrow("table_id"));
+                Revenue revenue = new Revenue(id, date, amount, tableId);
+                rs.add(revenue);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        database.close();
+        return rs;
+    }
+
+    public ArrayList<RevenueDetail> getAllRevenueDetailByTableID(int tableId) {
+        SQLiteDatabase database = databaseUtils.getReadableDatabase();
+        ArrayList<RevenueDetail> revenueDetails = new ArrayList<>();
+        //String sql = "SELECT tb.table_number, tb.table_date, mi.menu_item_name, mi.menu_item_price, tbi.quantity, tbi.order_date FROM revenue rv JOIN tables tb ON tb.table_id = rv.table_id JOIN table_menu_items tbi ON tbi.table_id = tb.table_id JOIN menu_items mi ON mi.menu_item_id = tbi.menu_item_id WHERE rv.table_id = ?;";
+        String sql =
+            "SELECT tb.table_number, tb.table_date, mi.menu_item_name, mi.menu_item_price, " +
+                    "tbi.quantity, tbi.order_date " +
+                    "FROM revenue rv " +
+                    "JOIN tables tb ON tb.table_id = rv.table_id " +
+                    "JOIN table_menu_items tbi ON tbi.table_id = tb.table_id " +
+                    "JOIN menu_items mi ON mi.menu_item_id = tbi.menu_item_id " +
+                    "WHERE rv.table_id = ?;";
+        Cursor cursor = database.rawQuery(sql, new String[]{tableId+""});
+        if(cursor.moveToFirst()){
+            while (!cursor.isAfterLast()){
+                int table_number = cursor.getInt(cursor.getColumnIndexOrThrow("table_number"));
+                String table_date = cursor.getString(cursor.getColumnIndexOrThrow("table_date"));
+                String menu_item_name = cursor.getString(cursor.getColumnIndexOrThrow("menu_item_name"));
+                int menu_item_price = cursor.getInt(cursor.getColumnIndexOrThrow("menu_item_price"));
+                int quantity = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"));
+                String order_date = cursor.getString(cursor.getColumnIndexOrThrow("order_date"));
+                RevenueDetail revenueDetail = new RevenueDetail(table_number, table_date, menu_item_name, menu_item_price, quantity, order_date);
+                revenueDetails.add(revenueDetail);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        database.close();
+        return revenueDetails;
     }
 
     public long addNewRevenue(Revenue revenue) {

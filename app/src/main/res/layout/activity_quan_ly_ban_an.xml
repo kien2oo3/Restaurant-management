@@ -31,7 +31,8 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="Danh sách bàn ăn:"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/lvBanAn"

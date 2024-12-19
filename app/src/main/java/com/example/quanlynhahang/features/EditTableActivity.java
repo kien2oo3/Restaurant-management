@@ -37,6 +37,7 @@ import com.example.quanlynhahang.entity.Tables;
 import com.example.quanlynhahang.utils.DatabaseUtils;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -118,6 +119,7 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
         edtNewTabledate = findViewById(R.id.edtNewTabledate);
         edtTableTotal = findViewById(R.id.edtTableTotal);
         spinerNewTableStatus = findViewById(R.id.spinerNewTableStatus);
+        spinerNewTableStatus.setBackgroundResource(android.R.drawable.btn_dropdown);
         btnToUpdateMon = findViewById(R.id.btnToUpdateMon);
         btnUpdateTable = findViewById(R.id.btnUpdateTable);
         btnDeleteTable = findViewById(R.id.btnDeleteTable);
@@ -173,16 +175,13 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
             }
         } else if (btnPayMoney == view) {
             if (!spinerNewTableStatus.getSelectedItem().toString().equals("Trống")) {
-                spinerNewTableStatus.setBackgroundColor(Color.TRANSPARENT);
+                spinerNewTableStatus.setBackgroundResource(android.R.drawable.btn_dropdown);
                 if (total != 0) {
-                    // Lấy thời gian hiện tại
+                    // Lấy ngày giờ hiện tại bằng Calendar
                     Calendar calendar = Calendar.getInstance();
-                    // Lấy các giá trị ngày, tháng, năm
-                    int year = calendar.get(Calendar.YEAR);
-                    int month = calendar.get(Calendar.MONTH) + 1; // Cộng 1 vì tháng bắt đầu từ 0
-                    int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    // Định dạng ngày theo kiểu ngày-tháng-năm
-                    String formattedDate = String.format("%02d-%02d-%04d", day, month, year);
+                    // Định dạng ngày giờ theo "dd-MM-yyyy HH:mm:ss"
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    String formattedDateTime = formatter.format(calendar.getTime());
 
                     // Định dạng giá tiền theo chuẩn Việt Nam
                     DecimalFormat decimalFormat = new DecimalFormat("#,###");
@@ -191,13 +190,13 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
                     Revenue revenue = new Revenue();
                     revenue.setRevenue_amount(total);
                     revenue.setTable_id(tableId);
-                    revenue.setRevenue_date(formattedDate);
+                    revenue.setRevenue_date(formattedDateTime);
                     showPayDialog(revenue, formattedTotal);
                 } else {
                     Toast.makeText(this, "Hóa đơn 0đ không thể thanh toán!", Toast.LENGTH_SHORT).show();
                 }
             }else{
-                spinerNewTableStatus.setBackgroundColor(Color.RED);
+                spinerNewTableStatus.setBackgroundResource(R.drawable.spiner_highlight);
                 Toast.makeText(this, "Vui lòng cập nhật lại trạng thái bàn sang đang sử dụng!", Toast.LENGTH_LONG).show();
             }
         } else if (edtNewTabledate == view) {

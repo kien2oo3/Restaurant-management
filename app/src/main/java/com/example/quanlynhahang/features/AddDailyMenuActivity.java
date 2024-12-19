@@ -1,6 +1,7 @@
 package com.example.quanlynhahang.features;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quanlynhahang.Adapters.DailyMenuItemAdapter;
+import com.example.quanlynhahang.QLMenuTheoNgayActivity;
 import com.example.quanlynhahang.R;
 import com.example.quanlynhahang.dao.DailyMenuDAO;
 import com.example.quanlynhahang.dao.MenuItemDAO;
@@ -95,6 +97,8 @@ public class AddDailyMenuActivity extends AppCompatActivity implements View.OnCl
             ArrayList<MenuItems> temp = new ArrayList<>(itemsSelected);
             if(dailyMenuDAO.insertMenuItemsForDate(edtSelectDate.getText().toString(), temp)){
                 Toast.makeText(this, "Thêm món ăn theo ngày thành công!", Toast.LENGTH_SHORT).show();
+                Intent myItent = new Intent(AddDailyMenuActivity.this, QLMenuTheoNgayActivity.class);
+                startActivity(myItent);
             }else{
                 Toast.makeText(this, "Lỗi khi thêm món ăn theo ngày!", Toast.LENGTH_SHORT).show();
             }

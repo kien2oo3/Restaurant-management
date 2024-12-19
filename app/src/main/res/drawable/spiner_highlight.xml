@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF"/> <!-- Nền Spinner -->
+    <stroke android:width="2dp" android:color="#FF0000"/> <!-- Viền đỏ -->
+    <corners android:radius="5dp"/>
+</shape>

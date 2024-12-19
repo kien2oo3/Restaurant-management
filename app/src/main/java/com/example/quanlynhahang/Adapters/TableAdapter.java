@@ -41,7 +41,7 @@ public class TableAdapter extends ArrayAdapter<Tables> {
         TextView txtTenBan = convertView.findViewById(R.id.txtTenBan);
         TextView txtTrangThai = convertView.findViewById(R.id.txtTrangThai);
 
-        txtTenBan.setText("Bàn " + table.getTable_number());
+        txtTenBan.setText(String.format("Bàn %s", table.getTable_number()+""));
         txtTrangThai.setText(String.format("Trạng thái: %s", table.getStatus().equals("Đang sử dụng") ? table.getStatus() + " (chưa thanh toán)" : table.getStatus()));
 
         return convertView;

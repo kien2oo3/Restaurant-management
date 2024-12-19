@@ -15,8 +15,25 @@
         android:theme="@style/Theme.QuanLyNhaHang"
         tools:targetApi="31">
         <activity
+            android:name=".features.RevenueDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".RevenueActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RevenueActivity" />
+        </activity>
+        <activity
+            android:name=".RevenueActivity"
+            android:exported="false"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
             android:name=".features.UpdateMenuItemForTableActivity"
-            android:exported="false" android:parentActivityName=".features.EditTableActivity">
+            android:exported="false"
+            android:parentActivityName=".features.EditTableActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".features.EditTableActivity" />

@@ -97,6 +97,7 @@ public class AddMenuItemActivity extends AppCompatActivity implements View.OnCli
                 MenuItems item = new MenuItems(0, name, description, price, imgPath);
                 if (menuItemDAO.addNewMenuItem(item) != -1) {
                     Toast.makeText(this, "Thêm món ăn thành công!", Toast.LENGTH_SHORT).show();
+                    resetEditBox();
                 } else {
                     Toast.makeText(this, "Lỗi khi thêm món ăn!", Toast.LENGTH_SHORT).show();
                 }
@@ -121,5 +122,23 @@ public class AddMenuItemActivity extends AppCompatActivity implements View.OnCli
             return false;
         }
         return true;
+    }
+
+    private  void resetEditBox(){
+        edtNewItemName.setText("");
+        edtNewItemName.requestFocus();
+        edtNewItemDesc.setText("");
+        edtNewItemPrice.setText("");
+        Glide.with(this)
+                .load(R.drawable.img)
+                .placeholder(R.drawable.img)
+                .error(R.drawable.error_image)
+                .into(btnNewItemImg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        menuItemDAO.close();
+        super.onDestroy();
     }
 }

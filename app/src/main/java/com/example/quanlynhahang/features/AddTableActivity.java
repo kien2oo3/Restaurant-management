@@ -77,6 +77,7 @@ public class AddTableActivity extends AppCompatActivity {
         edtTableCapacity = findViewById(R.id.edtTableCapacity);
         edtTabledate = findViewById(R.id.edtTabledate);
         spinerTableStatus = findViewById(R.id.spinerTableStatus);
+        spinerTableStatus.setBackgroundResource(android.R.drawable.btn_dropdown);
         btnAddTable = findViewById(R.id.btnAddTable);
 
         // Them lua chon spiner:

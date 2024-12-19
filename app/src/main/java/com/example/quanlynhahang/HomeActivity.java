@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void truyCapDoanhThu(View v) {
-        // Code here
+        Intent myItent = new Intent(HomeActivity.this, RevenueActivity.class);
+        startActivity(myItent);
     }
 }
