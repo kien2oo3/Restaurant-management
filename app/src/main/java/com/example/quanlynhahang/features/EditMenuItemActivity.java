@@ -152,7 +152,7 @@ public class EditMenuItemActivity extends AppCompatActivity implements View.OnCl
             }
         } else if (btnDeleteItem == view) {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditMenuItemActivity.this);
-            builder.setTitle("Xóa món ăn");
+            builder.setTitle("Xóa món ăn " + edtItemName.getText().toString());
             builder.setMessage("Bạn chắc chắn muốn xóa?");
             builder.setIcon(R.drawable.icon_delete);
             builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {

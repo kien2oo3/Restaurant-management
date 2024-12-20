@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="30000000"
+                android:text="X.000.000đ"
                 android:gravity="center"
                 android:textSize="18sp"/>
         </TableRow>

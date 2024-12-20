@@ -107,7 +107,6 @@ public class DailyMenuDAO {
         if(cursor.moveToFirst()){
             id = cursor.getInt(0);
         }
-        database.close();
         return id;
     }
 

@@ -18,14 +18,15 @@
         app:title="THỐNG KÊ DOANH THU"
         app:titleTextColor="#fff" />
 
-    <TextView
-        android:id="@+id/textView40"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="DOANH THU THEO NGÀY"
+        android:enabled="false"
+        android:gravity="center"
         android:padding="10dp"
-        android:text="Doanh thu theo ngày:"
         android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textColor="#E91E63"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,14 +95,15 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView33"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="LỊCH SỬ"
+        android:enabled="false"
+        android:gravity="center"
         android:padding="10dp"
-        android:text="Lịch sử:"
         android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textColor="#E91E63"/>
 
     <LinearLayout
         android:layout_width="match_parent"

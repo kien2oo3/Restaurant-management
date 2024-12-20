@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Xôi gà"
+        android:text="Món A"
         android:textSize="20sp"
         android:layout_gravity="center"
         android:gravity="center"/>
@@ -20,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="25.000đ"
+        android:text="XX.000đ"
         android:textSize="20sp"
         android:layout_gravity="center"
         android:gravity="center"/>
@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="2"
+        android:text="0"
         android:textSize="20sp"
         android:layout_gravity="center"
         android:gravity="center"/>

@@ -3,6 +3,8 @@ package com.example.quanlynhahang;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +13,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -89,7 +93,7 @@ public class RevenueActivity extends AppCompatActivity implements View.OnClickLi
             showDatePicker();
         } else if (btnFilterByDate == view) {
             if (edtSelectDetaildate.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Vui long chọn ngày để tìm!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Vui lòng chọn ngày để tìm!", Toast.LENGTH_LONG).show();
             } else {
                 int total = 0;
                 String dateFilter = edtSelectDetaildate.getText().toString();
@@ -117,6 +121,11 @@ public class RevenueActivity extends AppCompatActivity implements View.OnClickLi
             String formattedPrice = decimalFormat.format(total) + "₫";
             edtShowRevenue.setText(String.format("Ngày %s, doanh thu: %s", formattedDateTime, formattedPrice));
         } else if (btnSendBoss == view) {
+            if(edtSelectDetaildate.getText().toString().isEmpty()){
+                edtSelectDetaildate.setError("Tìm doanh thu theo ngày để gửi!");
+                return;
+            }
+            edtSelectDetaildate.setError(null);
             sendEmail();
         }
     }
@@ -166,6 +175,48 @@ public class RevenueActivity extends AppCompatActivity implements View.OnClickLi
         email.setType("message/rfc822");
 
         startActivity(Intent.createChooser(email, "Choose an Email client :"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_revenue_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        assert searchView != null;
+        // Gán sự kiện submit:
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String date) {
+                if (date.isEmpty()) {
+                    return false;
+                }
+                ArrayList<Revenue> revenueArrayList = new ArrayList<>();
+                for (Revenue rv : myArr) {
+                    if (rv.getRevenue_date().split(" ")[0].equals(date)) {
+                        revenueArrayList.add(rv);
+                    }
+                }
+                if (revenueArrayList.size() <= 0) {
+                    Toast.makeText(RevenueActivity.this, "Không tìm thấy doanh thu ngày " + date, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RevenueActivity.this, String.format("Đã tìm được %d bản ghi", revenueArrayList.size()), Toast.LENGTH_SHORT).show();
+                }
+                adapter = new RevenueAdapter(RevenueActivity.this, R.layout.layout_item_doanh_thu, revenueArrayList);
+                lvRevenue.setAdapter(adapter);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

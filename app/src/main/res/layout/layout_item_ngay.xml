@@ -24,7 +24,7 @@
                 android:id="@+id/txtDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12/9/2024"
+                android:text="XX-XX-XXXX"
                 android:textColor="#f00"
                 android:textSize="20sp" />
         </TableRow>
@@ -44,7 +44,7 @@
                 android:id="@+id/txtSLMon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"
+                android:text="X"
                 android:textColor="#f00"
                 android:textSize="20sp" />
         </TableRow>

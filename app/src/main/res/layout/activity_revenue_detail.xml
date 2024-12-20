@@ -21,8 +21,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:stretchColumns="*">
 
         <TableRow
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 style="@style/MyTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bàn số 1" />
+                android:text="Bàn số X" />
         </TableRow>
 
         <TableRow
@@ -52,17 +52,64 @@
                 style="@style/MyTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Menu ngày:" />
+                android:text="Thực đơn ngày:" />
 
             <TextView
                 android:id="@+id/txtDetailMenuDate"
                 style="@style/MyTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19-12-2024" />
+                android:text="XX-XX-XXXX" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView42"
+                style="@style/MyTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày thanh toán:" />
+
+            <TextView
+                android:id="@+id/txtDetailRevenueDate"
+                style="@style/MyTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XX-XX-XXXX XX:XX:XX" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView43"
+                style="@style/MyTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền:" />
+
+            <TextView
+                android:id="@+id/txtDetailRevenueAmount"
+                style="@style/MyTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X000.000đ" />
         </TableRow>
 
     </TableLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHI TIẾT MÓN"
+        android:enabled="false"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="20sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

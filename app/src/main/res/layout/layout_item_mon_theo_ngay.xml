@@ -21,14 +21,14 @@
             android:id="@+id/txtTenMon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Xôi thập cẩm"
+            android:text="Món A"
             android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/txtGiaTien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="35.000đ"
+            android:text="XX.000đ"
             android:textSize="16sp"
             android:textColor="#80000000"/>
     </LinearLayout>

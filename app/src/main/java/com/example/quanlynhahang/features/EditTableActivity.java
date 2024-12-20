@@ -1,5 +1,6 @@
 package com.example.quanlynhahang.features;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -48,7 +49,6 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
     Toolbar toolbarEditBanAn;
 
     private int tableId;
-    private String tableDate;
     private int total;
 
     TableDAO tableDAO = null;
@@ -86,15 +86,14 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
         if (myItent != null) {
             int table_id = myItent.getIntExtra("table_id", -1);
             if (table_id != -1) {
+                tableId = table_id;
                 Tables table = tableDAO.getTableByID(table_id);
                 if (table != null) {
                     edtNewTableNumber.setText(table.getTable_number() + "");
                     edtNewTableCapacity.setText(table.getCapacity() + "");
                     edtNewTabledate.setText(table.getTable_date());
-                    tableId = table_id;
-                    tableDate = table.getTable_date();
 
-                    total = tableMenuItemDAO.getTotalByTableId(table_id);
+                    total = tableMenuItemDAO.getTotalByTableId(tableId);
                     // Định dạng giá tiền theo chuẩn Việt Nam
                     DecimalFormat decimalFormat = new DecimalFormat("#,###");
                     String formattedPrice = decimalFormat.format(total) + "₫";
@@ -157,7 +156,7 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
         if (btnToUpdateMon == view) {
             Intent myItent = new Intent(EditTableActivity.this, UpdateMenuItemForTableActivity.class);
             myItent.putExtra("table_id", tableId);
-            myItent.putExtra("table_date", tableDate);
+            myItent.putExtra("table_date", edtNewTabledate.getText().toString());
             activityResultLauncher.launch(myItent);
         } else if (btnUpdateTable == view) {
             if (checkEditBox()) {
@@ -195,7 +194,7 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
                 } else {
                     Toast.makeText(this, "Hóa đơn 0đ không thể thanh toán!", Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 spinerNewTableStatus.setBackgroundResource(R.drawable.spiner_highlight);
                 Toast.makeText(this, "Vui lòng cập nhật lại trạng thái bàn sang đang sử dụng!", Toast.LENGTH_LONG).show();
             }
@@ -216,7 +215,7 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
                 this,
                 (view, year1, month1, dayOfMonth) -> {
                     // Định dạng ngày theo kiểu "dd-MM-yyyy"
-                    String date = String.format("%02d-%02d-%04d", dayOfMonth, month1 + 1, year1);
+                    @SuppressLint("DefaultLocale") String date = String.format("%02d-%02d-%04d", dayOfMonth, month1 + 1, year1);
                     edtNewTabledate.setText(date);
                 },
                 year, month, day
@@ -227,7 +226,7 @@ public class EditTableActivity extends AppCompatActivity implements View.OnClick
 
     private void showAlertDialog(int tableId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditTableActivity.this);
-        builder.setTitle("Xóa bàn ăn");
+        builder.setTitle("Xóa bàn ăn số " + edtNewTableNumber.getText().toString());
         builder.setMessage("Bạn chắc chắn muốn xóa?");
         builder.setIcon(R.drawable.icon_delete);
         builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
