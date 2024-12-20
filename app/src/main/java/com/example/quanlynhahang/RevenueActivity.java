@@ -121,7 +121,7 @@ public class RevenueActivity extends AppCompatActivity implements View.OnClickLi
             String formattedPrice = decimalFormat.format(total) + "₫";
             edtShowRevenue.setText(String.format("Ngày %s, doanh thu: %s", formattedDateTime, formattedPrice));
         } else if (btnSendBoss == view) {
-            if(edtSelectDetaildate.getText().toString().isEmpty()){
+            if(edtShowRevenue.getText().toString().isEmpty()){
                 edtSelectDetaildate.setError("Tìm doanh thu theo ngày để gửi!");
                 return;
             }
