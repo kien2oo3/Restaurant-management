@@ -18,11 +18,46 @@
         app:title="CHI TIẾT DOANH THU"
         app:titleTextColor="#fff" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnExportPDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/icon_pdf"
+        android:text=" Xuất hóa đơn" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="CHI TIẾT HÓA ĐƠN"
+        android:textSize="20sp" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView45"
+                style="@style/MyTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã hóa đơn:" />
+
+            <TextView
+                android:id="@+id/txtDetailRevenueId"
+                style="@style/MyTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -105,11 +140,11 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CHI TIẾT MÓN"
         android:enabled="false"
         android:gravity="center"
         android:padding="10dp"
-        android:textSize="20sp"/>
+        android:text="CHI TIẾT MÓN"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

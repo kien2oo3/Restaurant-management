@@ -56,6 +56,7 @@ public class RevenueAdapter extends ArrayAdapter<Revenue> {
             @Override
             public void onClick(View view) {
                 Intent myItent = new Intent(context, RevenueDetailActivity.class);
+                myItent.putExtra("revenueId", revenue.getRevenue_id());
                 myItent.putExtra("tableId", revenue.getTable_id());
                 myItent.putExtra("revenueDate", revenue.getRevenue_date());
                 myItent.putExtra("revenueAmount", revenue.getRevenue_amount());
