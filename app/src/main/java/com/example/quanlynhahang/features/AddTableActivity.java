@@ -127,10 +127,12 @@ public class AddTableActivity extends AppCompatActivity {
         if (edtTableCapacity.getText().toString().isEmpty()) {
             edtTableCapacity.setError("Không để trống số chỗ ngồi!");
             edtTableCapacity.requestFocus();
+            return false;
         }
         if (edtTabledate.getText().toString().isEmpty()) {
-            edtTabledate.setError("Hãy chọn ngày tạo bàn ăn!");
+            edtTabledate.setError("Hãy chọn thực đơn theo ngày cho bàn!");
             edtTabledate.requestFocus();
+            return false;
         }
         return true;
     }
