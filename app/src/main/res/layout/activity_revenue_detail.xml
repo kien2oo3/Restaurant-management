@@ -73,6 +73,7 @@
             <TextView
                 android:id="@+id/txtDetailTableName"
                 style="@style/MyTextViewStyle"
+                android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bàn số X" />
@@ -92,6 +93,7 @@
             <TextView
                 android:id="@+id/txtDetailMenuDate"
                 style="@style/MyTextViewStyle"
+                android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="XX-XX-XXXX" />
@@ -111,6 +113,7 @@
             <TextView
                 android:id="@+id/txtDetailRevenueDate"
                 style="@style/MyTextViewStyle"
+                android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="XX-XX-XXXX XX:XX:XX" />
@@ -130,6 +133,7 @@
             <TextView
                 android:id="@+id/txtDetailRevenueAmount"
                 style="@style/MyTextViewStyle"
+                android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="X000.000đ" />

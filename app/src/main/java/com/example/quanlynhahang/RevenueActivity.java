@@ -197,7 +197,7 @@ public class RevenueActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }
                 if (revenueArrayList.size() <= 0) {
-                    Toast.makeText(RevenueActivity.this, "Không tìm thấy doanh thu ngày " + date, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RevenueActivity.this, "Không tìm thấy hóa đơn nào vào ngày " + date, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(RevenueActivity.this, String.format("Đã tìm được %d bản ghi", revenueArrayList.size()), Toast.LENGTH_SHORT).show();
                 }

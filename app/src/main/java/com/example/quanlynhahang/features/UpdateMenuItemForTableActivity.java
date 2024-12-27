@@ -63,7 +63,7 @@ public class UpdateMenuItemForTableActivity extends AppCompatActivity {
         getWidgets();
 
         Intent myItent = getIntent();
-        if(myItent!=null){
+        if (myItent != null) {
             tableId = myItent.getIntExtra("table_id", -1);
             tableDate = myItent.getStringExtra("table_date");
         }
@@ -72,16 +72,15 @@ public class UpdateMenuItemForTableActivity extends AppCompatActivity {
         adapter = new MenuItemForTableAdapter(UpdateMenuItemForTableActivity.this, R.layout.layout_item_mon_theo_ban, myArr);
 
         ArrayList<TableMenuItems> tableMenuItems = tableMenuItemDAO.getTableMenuItemsByTableId(tableId);
-        Toast.makeText(this, "Size: "+tableMenuItems.size(), Toast.LENGTH_SHORT).show();
-        Map<MenuItems, Integer> listSelected = new HashMap<>();
-        for(TableMenuItems table : tableMenuItems){
-            if(table.getTable_id() == tableId){
+        if (!tableMenuItems.isEmpty()) {
+            Map<MenuItems, Integer> listSelected = new HashMap<>();
+            for (TableMenuItems table : tableMenuItems) {
                 MenuItems item = menuItemDAO.getMenuItemByID(table.getMenu_item_id());
                 int quantity = table.getQuantity();
                 listSelected.put(item, quantity);
             }
+            adapter.setSelectedItemsWithQuantity(listSelected);
         }
-        adapter.setSelectedItemsWithQuantity(listSelected);
 
         lvMonTheoBan.setAdapter(adapter);
 
@@ -90,14 +89,14 @@ public class UpdateMenuItemForTableActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Map<MenuItems, Integer> listSelected = adapter.getSelectedItemsWithQuantity();
-                if(tableMenuItemDAO.insertTableMenuItems(listSelected, tableId)){
+                if (tableMenuItemDAO.insertTableMenuItems(listSelected, tableId)) {
                     Toast.makeText(UpdateMenuItemForTableActivity.this, "Cập nhật các món theo bàn thành công!", Toast.LENGTH_SHORT).show();
-                    if(myItent!=null){
+                    if (myItent != null) {
                         myItent.putExtra("total", tableMenuItemDAO.getTotalBySelectedNewItems(listSelected));
                         setResult(Activity.RESULT_OK, myItent);
                         finish();
                     }
-                }else{
+                } else {
                     Toast.makeText(UpdateMenuItemForTableActivity.this, "Lỗi khi cập nhật các món theo bàn!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -112,7 +111,7 @@ public class UpdateMenuItemForTableActivity extends AppCompatActivity {
         setSupportActionBar(toolbarUpdateMonTheoBanAn);
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -120,7 +119,7 @@ public class UpdateMenuItemForTableActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
